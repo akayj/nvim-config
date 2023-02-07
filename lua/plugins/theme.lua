@@ -1,5 +1,5 @@
-vim.o.background = 'dark'
--- vim.o.background = 'light'
+-- vim.o.background = 'dark'
+vim.o.background = 'light'
 
 local c = require('vscode.colors').get_colors()
 require('vscode').setup({
