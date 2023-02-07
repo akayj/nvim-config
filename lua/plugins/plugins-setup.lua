@@ -38,6 +38,9 @@ return require('packer').startup(function(use)
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
+  use 'nvim-tree/nvim-web-devicons'
+  use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+
   use {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
