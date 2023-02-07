@@ -21,9 +21,9 @@ vim.cmd([[
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  -- use 'folke/tokyonight.nvim'
+  use 'folke/tokyonight.nvim'
     -- Packer:
-  use 'Mofiqul/vscode.nvim'
+  -- use 'Mofiqul/vscode.nvim'
 
   use {
       'nvim-lualine/lualine.nvim',
