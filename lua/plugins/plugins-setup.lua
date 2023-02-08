@@ -21,7 +21,8 @@ vim.cmd([[
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use 'folke/tokyonight.nvim'
+  -- use 'folke/tokyonight.nvim'
+  use { "ellisonleao/gruvbox.nvim" }
   -- Packer:
   -- use 'Mofiqul/vscode.nvim'
 
@@ -79,6 +80,11 @@ return require('packer').startup(function(use)
 
   use 'nvim-tree/nvim-web-devicons'
   use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+
+  use {
+    'lewis6991/gitsigns.nvim',
+    -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+  }
 
   use {
     "windwp/nvim-autopairs",

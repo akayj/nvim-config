@@ -10,6 +10,7 @@ require('plugins.tab')
 
 require('plugins.find')
 require("plugins.autopair")
+require('plugins.git')
 
 require('plugins.blank')
 require('plugins.inlay')
