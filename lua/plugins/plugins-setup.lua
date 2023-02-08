@@ -26,9 +26,48 @@ return require('packer').startup(function(use)
   -- use 'Mofiqul/vscode.nvim'
 
   use {
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+        -- config
+      }
+    end,
+    requires = {'nvim-tree/nvim-web-devicons'}
+  }
+
+  -- using packer.nvim
+  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
+
+  use {
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
+
+  use 'famiu/bufdelete.nvim'
+  use "lukas-reineke/indent-blankline.nvim"
+
+  use {'hrsh7th/nvim-cmp', requires = {
+    'neovim/nvim-lspconfig',
+    'hrsh7th/cmp-nvim-lsp',
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
+    'hrsh7th/cmp-buffer',
+  }}
+
+  use 'simrat39/inlay-hints.nvim'
+  -- use { 'shurizzle/inlay-hints.nvim' }
+  -- use 'lvimuser/lsp-inlayhints.nvim'
+
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  })
 
   use {
     'nvim-tree/nvim-tree.lua',
@@ -53,10 +92,25 @@ return require('packer').startup(function(use)
     end
   }
 
+  use { "williamboman/mason.nvim" }
+
+  use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' -- recommended if need floating window support
-  use 'neovim/nvim-lspconfig'
   use 'nvim-treesitter/nvim-treesitter'
+
+  use {'simrat39/rust-tools.nvim', requires = 'neovim/nvim-lspconfig'}
+
+  -- Debugging
+  use 'nvim-lua/plenary.nvim'
+  use 'mfussenegger/nvim-dap'
+
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.x',
+    -- or                            , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 
   use {
     "cuducos/yaml.nvim",
@@ -74,6 +128,11 @@ return require('packer').startup(function(use)
     config = function()
       require('crates').setup()
     end,
+  }
+
+  use {
+    'stevearc/aerial.nvim',
+    config = function() require('aerial').setup() end
   }
 
   -- Automatically set up your configuration after cloning packer.nvim

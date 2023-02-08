@@ -1,4 +1,6 @@
-require('go').setup()
+require('go').setup({
+  lsp_inlay_hints = { enable = false },
+})
 
 -- Run gofmt + goimport on save
 
@@ -11,3 +13,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_sync_grp,
 })
 
+
+-- require('lspconfig').gopls.setup{}
