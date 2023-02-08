@@ -84,7 +84,9 @@ return require('packer').startup(function(use)
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
+      'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
+      'MunifTanjim/nui.nvim',
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
