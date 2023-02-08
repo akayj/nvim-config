@@ -22,9 +22,18 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- use 'folke/tokyonight.nvim'
-  use { "ellisonleao/gruvbox.nvim" }
-  -- Packer:
+  -- use { "ellisonleao/gruvbox.nvim" }
   -- use 'Mofiqul/vscode.nvim'
+  use({
+    'projekt0n/github-nvim-theme', tag = 'v0.0.7',
+    config = function()
+      require('github-theme').setup({
+        -- theme_style = 'dark'
+        function_style = 'italic',
+        colors = {hint = 'orange', error = '#ff0000'},
+      })
+    end
+  })
 
   use {
     'glepnir/dashboard-nvim',
@@ -100,7 +109,14 @@ return require('packer').startup(function(use)
 
   use { "williamboman/mason.nvim" }
 
-  use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+  use {
+    'neovim/nvim-lspconfig',
+    requires = 'nvim-lua/lsp-status.nvim',
+    config = function()
+      require('lsp-status').register_progress()
+    end
+  }
+  -- Configurations for Nvim LSP
 
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' -- recommended if need floating window support
