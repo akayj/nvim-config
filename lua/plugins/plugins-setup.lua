@@ -24,16 +24,18 @@ return require('packer').startup(function(use)
   -- use 'folke/tokyonight.nvim'
   -- use { "ellisonleao/gruvbox.nvim" }
   -- use 'Mofiqul/vscode.nvim'
-  use({
-    'projekt0n/github-nvim-theme', tag = 'v0.0.7',
-    config = function()
-      require('github-theme').setup({
-        -- theme_style = 'dark'
-        function_style = 'italic',
-        colors = {hint = 'orange', error = '#ff0000'},
-      })
-    end
-  })
+  -- use({
+  --   'projekt0n/github-nvim-theme', tag = 'v0.0.7',
+  --   config = function()
+  --     require('github-theme').setup({
+  --       theme_style = 'light',
+  --       function_style = 'italic',
+  --       colors = {hint = 'orange', error = '#ff0000'},
+  --     })
+  --   end
+  -- })
+
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   use {
     'glepnir/dashboard-nvim',
