@@ -14,13 +14,15 @@ require('plugins.find')
 require("plugins.autopair")
 require('plugins.git')
 
+require('plugins.cmp')
+
 require('plugins.blank')
-require('plugins.inlay')
 
 require('plugins.mason')
 require('plugins.aerial')
 
 require('plugins.lsp')
+require('plugins.inlay')
 
 require('plugins.go')
 require('plugins.rust')

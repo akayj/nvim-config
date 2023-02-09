@@ -30,6 +30,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
 end
 
 local lsp_flags = {
@@ -38,8 +39,31 @@ local lsp_flags = {
 }
 
 require('lspconfig').gopls.setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
+  -- on_attach = on_attach,
+  on_attach = function (c, b)
+    local ih = require('inlay-hints')
+    ih.on_attach(c, b)
+
+    on_attach(c, b);
+  end,
+
+  flags = lsp_flags,
+
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+
+  settings = {
+    gopls = {
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+    },
+  },
 }
 
 -- require('lspconfig')['pyright'].setup{

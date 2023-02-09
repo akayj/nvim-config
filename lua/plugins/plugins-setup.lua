@@ -40,11 +40,7 @@ return require('packer').startup(function(use)
   use {
     'glepnir/dashboard-nvim',
     event = 'VimEnter',
-    config = function()
-      require('dashboard').setup {
-        -- config
-      }
-    end,
+    config = function() require('dashboard').setup {} end,
     requires = {'nvim-tree/nvim-web-devicons'}
   }
 
@@ -59,13 +55,29 @@ return require('packer').startup(function(use)
   use 'famiu/bufdelete.nvim'
   use "lukas-reineke/indent-blankline.nvim"
 
-  use {'hrsh7th/nvim-cmp', requires = {
-    'neovim/nvim-lspconfig',
-    'hrsh7th/cmp-nvim-lsp',
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-buffer',
-  }}
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      -- 'neovim/nvim-lspconfig',
+      -- 'hrsh7th/cmp-nvim-lsp',
+      -- 'L3MON4D3/LuaSnip',
+      -- 'saadparwaiz1/cmp_luasnip',
+      -- 'hrsh7th/cmp-buffer',
+
+      'neovim/nvim-lspconfig',
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+
+      -- For luasnip users.
+      'L3MON4D3/LuaSnip',
+      "saadparwaiz1/cmp_luasnip",
+
+      -- "octaltree/cmp-look",
+      -- "tzachar/cmp-tabnine"
+    },
+  }
 
   use 'simrat39/inlay-hints.nvim'
   -- use { 'shurizzle/inlay-hints.nvim' }
@@ -80,6 +92,12 @@ return require('packer').startup(function(use)
       })
     end
   })
+
+  use {
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    config = function() vim.g.startuptime_tries = 10 end
+  }
 
   use {
     'nvim-tree/nvim-tree.lua',
@@ -101,7 +119,17 @@ return require('packer').startup(function(use)
 
   use {
     "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
+    config = function()
+      require("nvim-autopairs").setup()
+
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      local cmp = require('cmp')
+
+      cmp.event:on(
+      'confirm_done',
+      cmp_autopairs.on_confirm_done
+      )
+    end
   }
 
   use {
@@ -135,6 +163,7 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.x',
     -- or                            , branch = '0.1.x',
+    -- event = "VimEnter",
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
