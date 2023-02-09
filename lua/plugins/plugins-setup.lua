@@ -185,6 +185,8 @@ return require('packer').startup(function(use)
     end,
   }
 
+  use 'raimon49/requirements.txt.vim'
+
   use {
     'stevearc/aerial.nvim',
     config = function() require('aerial').setup() end
