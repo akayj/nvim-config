@@ -152,7 +152,18 @@ return require('packer').startup(function(use)
 
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' -- recommended if need floating window support
-  use 'nvim-treesitter/nvim-treesitter'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      local ts_config = require('nvim-treesitter.configs')
+      ts_config.setup {
+        -- highlight = {
+        --   enable = true,
+        -- }
+        ensure_installed = { "c", "vim", "rust", "go", "python" }
+      }
+    end,
+  }
 
   use {'simrat39/rust-tools.nvim', requires = 'neovim/nvim-lspconfig'}
 
