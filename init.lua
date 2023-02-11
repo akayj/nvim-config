@@ -26,4 +26,3 @@ require('plugins.inlay')
 
 require('plugins.go')
 require('plugins.rust')
-

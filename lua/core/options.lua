@@ -28,3 +28,12 @@ opt.signcolumn = "yes"
 vim.o.background = "light"
 -- vim.o.background = "dark"
 -- vim.cmd[[colorscheme gruvbox]]
+
+-- Figure out the system Python for Neovim.
+vim.cmd([[
+  if exists("$VIRTUAL_ENV")
+      let g:python3_host_prog=substitute(system("which -a python3 | head -n1"), "\n", '', 'g')
+  else
+      let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
+  endif
+]])

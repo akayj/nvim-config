@@ -3,7 +3,21 @@
 -- custom_gruvbox.normal.c.bg = '#112233'
 
 require('lualine').setup({
-  -- options = {
-  --   theme = 'github-nvim-theme',
-  -- }
+  options = {
+    -- theme = 'github-nvim-theme',
+    fmt = string.lower
+  },
+
+  sections = {
+    lualine_a = {
+      { 'mode', fmt = function(str) return str:sub(1, 1) end },
+      { 'fileformat', symbols = { unix = '', dos = '', mac = '' } },
+    },
+
+    lualine_b = { 'branch' },
+
+    lualine_c = {
+      'data', "require'lsp-status'.status()"
+    }
+  }
 })
