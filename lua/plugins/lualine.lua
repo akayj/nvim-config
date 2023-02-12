@@ -11,7 +11,7 @@ require('lualine').setup({
   sections = {
     lualine_a = {
       { 'mode', fmt = function(str) return str:sub(1, 1) end },
-      { 'fileformat', symbols = { unix = '', dos = '', mac = '' } },
+      -- { 'fileformat', symbols = { unix = '', dos = '', mac = '' } },
     },
 
     lualine_b = { 'branch' },

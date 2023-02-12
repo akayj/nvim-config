@@ -14,7 +14,7 @@ local packer_bootstrap = ensure_packer()
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
 ]])
 
@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
   --   end
   -- })
 
-  use { "catppuccin/nvim", as = "catppuccin" }
+  use { "ellisonleao/gruvbox.nvim" }
 
   use {
     'glepnir/dashboard-nvim',
@@ -189,14 +189,15 @@ return require('packer').startup(function(use)
 
   use {
     'saecki/crates.nvim',
-    tag = 'v0.3.0',
+    -- tag = 'v0.3.0',
+    event = { "BufRead Cargo.toml" },
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('crates').setup()
     end,
   }
 
-  use 'raimon49/requirements.txt.vim'
+  use { 'raimon49/requirements.txt.vim', event = { "BufRead *requirements.txt" } }
 
   use {
     'stevearc/aerial.nvim',

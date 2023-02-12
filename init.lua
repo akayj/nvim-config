@@ -1,12 +1,13 @@
 require("core.options")
 require("core.keymaps")
-
-require("plugins.plugins-setup")
+require("core.plugins")
 
 require('plugins.theme')
 
 require('plugins.bufferline')
 require("plugins.lualine")
+require('plugins.blank')
+
 require("plugins.nvim-tree")
 require('plugins.tab')
 
@@ -16,7 +17,6 @@ require('plugins.git')
 
 require('plugins.cmp')
 
-require('plugins.blank')
 
 require('plugins.mason')
 require('plugins.aerial')
