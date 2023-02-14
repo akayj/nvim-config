@@ -67,12 +67,24 @@ require('lspconfig').gopls.setup{
 }
 
 require('lspconfig')['pyright'].setup{
-    on_attach = on_attach,
+    -- on_attach = on_attach,
+    on_attach = function (c, b)
+      local ih = require('inlay-hints')
+      ih.on_attach(c, b)
+
+      on_attach(c, b);
+    end,
     flags = lsp_flags,
 }
 
 require('lspconfig')['tsserver'].setup{
-    on_attach = on_attach,
+    -- on_attach = on_attach,
+    on_attach = function (c, b)
+      local ih = require('inlay-hints')
+      ih.on_attach(c, b)
+
+      on_attach(c, b);
+    end,
     flags = lsp_flags,
 }
 
