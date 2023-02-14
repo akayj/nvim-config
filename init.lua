@@ -10,6 +10,7 @@ require('plugins.blank')
 
 require("plugins.nvim-tree")
 require('plugins.tab')
+require('plugins.colorizer')
 
 require('plugins.find')
 require("plugins.autopair")
