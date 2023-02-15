@@ -12,12 +12,16 @@ require('lualine').setup({
     lualine_a = {
       { 'mode', fmt = function(str) return str:sub(1, 1) end },
       -- { 'fileformat', symbols = { unix = '', dos = '', mac = '' } },
+      'filetype',
     },
 
-    lualine_b = { 'branch' },
+    lualine_b = { 'branch', 'diff' },
 
     lualine_c = {
+      'filename',
       'data', "require'lsp-status'.status()"
-    }
+    },
+
+    lualine_x = {'encoding', 'fileformat'},
   }
 })
