@@ -18,7 +18,7 @@ vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 vim.cmd [[
   highlight ExtraWhitespace ctermbg=red guibg=yellow
 
-   match ExtraWhitespace /\s\+$/
+  match ExtraWhitespace /\s\+$/
 
   " Show trailing whitespace and spaces before a tab:
   " match ExtraWhitespace /\s\+$\| \+\ze\t/
