@@ -188,6 +188,16 @@ return require('packer').startup(function(use)
     end,
   }
 
+  use {
+      'sansyrox/vim-python-virtualenv',
+      config = function()
+          vim.cmd[[
+            let g:python_host_prog='.venv/bin/python'
+            let g:python3_host_prog='.venv/bin/python3'
+          ]]
+      end,
+  }
+
   -- TODO: use this latter
   -- use {
   --     'sbdchd/neoformat',
