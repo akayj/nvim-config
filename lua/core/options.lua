@@ -37,3 +37,5 @@ vim.cmd([[
       let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
   endif
 ]])
+
+vim.cmd [[autocmd BufWritePre *.py :Yapf]]

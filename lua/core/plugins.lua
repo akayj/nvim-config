@@ -179,6 +179,17 @@ return require('packer').startup(function(use)
   }
 
   use {
+    'amirali/yapf.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = function()
+      require('yapf').setup {
+        style = 'yapf',
+      }
+    end,
+  }
+
+
+  use {
     "cuducos/yaml.nvim",
     ft = {"yaml"}, -- optional
     requires = {
