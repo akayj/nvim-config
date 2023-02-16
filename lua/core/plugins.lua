@@ -188,6 +188,11 @@ return require('packer').startup(function(use)
     end,
   }
 
+  -- TODO: use this latter
+  -- use {
+  --     'sbdchd/neoformat',
+  -- }
+
 
   use {
     "cuducos/yaml.nvim",
