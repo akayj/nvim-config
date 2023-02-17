@@ -179,12 +179,13 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'amirali/yapf.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
-    config = function()
-      require('yapf').setup {}
-    end,
+      "akayj/yapf.nvim",
+      requires = {'nvim-lua/plenary.nvim'},
+      config = function()
+          require('yapf').setup{}
+      end,
   }
+
 
   use {
       'sansyrox/vim-python-virtualenv',
