@@ -182,9 +182,7 @@ return require('packer').startup(function(use)
     'amirali/yapf.nvim',
     requires = {'nvim-lua/plenary.nvim'},
     config = function()
-      require('yapf').setup {
-        style = 'yapf',
-      }
+      require('yapf').setup {}
     end,
   }
 
