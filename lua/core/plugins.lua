@@ -186,6 +186,10 @@ return require('packer').startup(function(use)
       end,
   }
 
+  -- use {
+  --     'stsewd/isort.nvim',
+  -- }
+
 
   use {
       'sansyrox/vim-python-virtualenv',
