@@ -23,19 +23,14 @@ return require('packer').startup(function(use)
 
   -- use 'folke/tokyonight.nvim'
   -- use { "ellisonleao/gruvbox.nvim" }
-  use 'Mofiqul/vscode.nvim'
-  -- use({
-  --   'projekt0n/github-nvim-theme', tag = 'v0.0.7',
-  --   config = function()
-  --     require('github-theme').setup({
-  --       theme_style = 'light',
-  --       function_style = 'italic',
-  --       colors = {hint = 'orange', error = '#ff0000'},
-  --     })
-  --   end
-  -- })
+  -- use 'Mofiqul/vscode.nvim'
+  use({
+    'projekt0n/github-nvim-theme', tag = 'v0.0.7',
+  })
 
   -- use { "ellisonleao/gruvbox.nvim" }
+
+  -- use 'Mofiqul/adwaita.nvim'
 
   use {
     'glepnir/dashboard-nvim',

@@ -25,8 +25,15 @@ opt.smartcase = true
 opt.termguicolors = true
 opt.signcolumn = "yes"
 
+vim.o.backup = fasle
+vim.o.swapfile = fasle
+vim.o.writebackup = fasle
+
+vim.wo.list = true
+vim.opt.listchars = { tab = '→ ', trail = '•', extends = '»', precedes = '«' }
+
 -- vim.cmd[[colorscheme tokyonight-moon]]
-vim.o.background = "light"
+-- vim.o.background = "light"
 -- vim.o.background = "dark"
 -- vim.cmd[[colorscheme gruvbox]]
 
