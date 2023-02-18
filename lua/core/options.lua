@@ -2,6 +2,8 @@ local opt = vim.opt
 
 opt.number = true
 
+opt.guifont="Jetbrains Mono:h11"
+
 opt.tabstop = 4
 opt.softtabstop=4
 opt.shiftwidth = 4
