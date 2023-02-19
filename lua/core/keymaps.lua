@@ -10,6 +10,7 @@ keymap.set("n", "<leader>sh", "<C-w>s")
 
 keymap.set("n", "<leader>nh", ":nohl<CR>")
 
+keymap.set("n", "<C-s>", ":w<CR>")
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 
 keymap.set("n", "<leader>d", ":bd<CR>")
