@@ -2,10 +2,10 @@ local opt = vim.opt
 
 opt.number = true
 
-opt.guifont="Jetbrains Mono:h11"
+opt.guifont = "Jetbrains Mono:h11"
 
 opt.tabstop = 4
-opt.softtabstop=4
+opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
@@ -32,7 +32,7 @@ vim.o.swapfile = fasle
 vim.o.writebackup = fasle
 
 vim.wo.list = true
-vim.opt.listchars = { tab = '→ ', trail = '•', extends = '»', precedes = '«' }
+vim.opt.listchars = { tab = "→ ", trail = "•", extends = "»", precedes = "«" }
 
 -- vim.cmd[[colorscheme tokyonight-moon]]
 -- vim.o.background = "light"
@@ -48,10 +48,10 @@ vim.cmd([[
   endif
 ]])
 
-vim.cmd [[autocmd BufWritePre *.py :Yapf]]
+vim.cmd([[autocmd BufWritePre *.py :Yapf]])
 
-vim.cmd [[
+vim.cmd([[
     autocmd FileType python set shiftwidth=4
     autocmd FileType python set tabstop=4
     autocmd FileType python set softtabstop=4
-]]
+]])
