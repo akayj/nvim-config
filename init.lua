@@ -27,3 +27,5 @@ require("plugins.inlay")
 require("plugins.go")
 require("plugins.rust")
 require("plugins.lua")
+
+require('plugins.snippets')
