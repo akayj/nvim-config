@@ -17,7 +17,7 @@ vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
 vim.cmd [[
   " highlight ExtraWhitespace ctermbg=red guibg=yellow
-  highlight ExtraWhitespace ctermbg=red guibg=#E06C75
+  " highlight ExtraWhitespace ctermbg=red guibg=#E06C75
 
   match ExtraWhitespace /\s\+$/
 

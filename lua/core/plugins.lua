@@ -26,10 +26,11 @@ return require("packer").startup(function(use)
 	-- use 'Mofiqul/vscode.nvim'
 	use({
 		"projekt0n/github-nvim-theme",
-		-- tag = "v0.0.7",
+		tag = "v0.0.7",
         config = function()
             require('github-theme').setup({})
-            vim.cmd('colorscheme github_light')
+            -- vim.cmd('colorscheme github_light')
+            vim.cmd('colorscheme github_dark')
         end
 	})
 
