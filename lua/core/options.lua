@@ -2,7 +2,10 @@ local opt = vim.opt
 
 opt.number = true
 
-opt.guifont = "Jetbrains Mono:h11"
+-- opt.guifont = "Jetbrains Mono:h11"
+opt.guifont = "Fira Code Retina:h11"
+-- 设置中文字体
+opt.guifontwide = "Microsoft YaHei Mono:h10"
 
 opt.tabstop = 4
 opt.softtabstop = 4
