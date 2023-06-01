@@ -8,7 +8,7 @@ keymap.set("v", "K", "<-2<CR>gv=gv")
 keymap.set("n", "<leader>sv", "<C-w>v")
 keymap.set("n", "<leader>sh", "<C-w>s")
 
-keymap.set("n", "<leader>nh", ":nohl<CR>")
+keymap.set("n", "<leader>h", ":nohl<CR>")
 
 keymap.set("n", "<C-s>", ":w<CR>")
 keymap.set("n", "<leader>n", ":NvimTreeToggle<CR>")
