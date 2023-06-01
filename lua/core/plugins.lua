@@ -173,6 +173,14 @@ return require("packer").startup(function(use)
 	-- Debugging
 	use("nvim-lua/plenary.nvim")
 	use("mfussenegger/nvim-dap")
+    use({
+        "theHamsta/nvim-dap-virtual-text",
+        config = function()
+            require("nvim-dap-virtual-text").setup()
+        end
+    })
+
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
 	use({
 		"nvim-telescope/telescope.nvim",
