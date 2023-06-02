@@ -142,7 +142,20 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({ "williamboman/mason.nvim" })
+	use({
+        "williamboman/mason.nvim",
+        config = function()
+            require('mason').setup({
+                ui = {
+                    icons = {
+                        package_installed = "✓",
+                        package_pending = "➜",
+                        package_uninstalled = "✗"
+                    }
+                }
+            })
+        end
+    })
 
 	use({
 		"neovim/nvim-lspconfig",
