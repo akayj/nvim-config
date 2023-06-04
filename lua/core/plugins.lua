@@ -156,6 +156,7 @@ return require("packer").startup(function(use)
                     nls.builtins.formatting.shfmt,
                     nls.builtins.formatting.hclfmt,
                     nls.builtins.formatting.prettierd,
+                    nls.builtins.formatting.rustfmt,
                 },
             })
         end,
@@ -203,7 +204,7 @@ return require("packer").startup(function(use)
                 },
 
                 incremental_selection = {
-                    enable = true,
+                    enable = false,
                     keymaps = {
                         init_selection = '<cr>',
                         node_incremental = '<cr>',

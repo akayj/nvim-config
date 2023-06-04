@@ -1,6 +1,6 @@
 require("core.options")
 require("core.keymaps")
-require("core.plugins")
+require('core.plugins')
 
 require("plugins.theme")
 
@@ -23,6 +23,7 @@ require("plugins.aerial")
 
 require("plugins.lsp")
 require("plugins.inlay")
+require("plugins/null-ls")
 
 require("plugins.go")
 require("plugins.rust")
