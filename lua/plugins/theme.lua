@@ -1,5 +1,5 @@
 require("github-theme").setup({
-  theme_style = "dark_default",
+  -- theme_style = "dark_default",
   -- theme_style = "dark_colorblind",
   -- function_style = "italic",
   sidebars = {"qf", "vista_kind", "terminal", "packer"},
@@ -19,5 +19,5 @@ require("github-theme").setup({
 })
 
 -- vim.o.background = 'dark'
--- vim.cmd([[color github_dark]])
+vim.cmd([[colorscheme github_dark]])
 -- vim.cmd.colorscheme "github_dark"

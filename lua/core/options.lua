@@ -2,8 +2,8 @@ local opt = vim.opt
 
 opt.number = true
 
--- opt.guifont = "Jetbrains Mono:h11"
-opt.guifont = "Fira Code Retina:h11"
+opt.guifont = "Jetbrains Mono:h11"
+-- opt.guifont = "Fira Code Retina:h11"
 -- 设置中文字体
 opt.guifontwide = "Microsoft YaHei Mono:h10"
 
@@ -43,13 +43,13 @@ vim.opt.listchars = { tab = "→ ", trail = "•", extends = "»", precedes = "�
 -- vim.cmd[[colorscheme gruvbox]]
 
 -- Figure out the system Python for Neovim.
-vim.cmd([[
-  if exists("$VIRTUAL_ENV")
-      let g:python3_host_prog=substitute(system("which -a python3 | head -n1"), "\n", '', 'g')
-  else
-      let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
-  endif
-]])
+-- vim.cmd([[
+--   if exists("$VIRTUAL_ENV")
+--       let g:python3_host_prog=substitute(system("which -a python3 | head -n1"), "\n", '', 'g')
+--   else
+--       let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
+--   endif
+-- ]])
 
 vim.cmd([[autocmd BufWritePre *.py :Yapf]])
 

@@ -4,7 +4,7 @@
 
 require('lualine').setup({
   options = {
-    -- theme = 'github-theme',
+    theme = 'github_dark',
     fmt = string.lower
   },
 
