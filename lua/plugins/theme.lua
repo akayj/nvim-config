@@ -19,5 +19,6 @@ require("github-theme").setup({
 })
 
 -- vim.o.background = 'dark'
-vim.cmd([[colorscheme github_dark]])
--- vim.cmd.colorscheme "github_dark"
+-- vim.cmd([[colorscheme github_dark]])
+-- vim.cmd([[colorscheme habamax]])
+vim.cmd([[colorscheme vscode]])

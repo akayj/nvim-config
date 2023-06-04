@@ -4,7 +4,7 @@
 
 require('lualine').setup({
   options = {
-    theme = 'github_dark',
+    theme = 'vscode',
     fmt = string.lower
   },
 

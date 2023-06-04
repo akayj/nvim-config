@@ -1,5 +1,5 @@
 local ensure_packer = function()
-    local fn = vim.fn
+    local fn =vim.fn
     local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
     if fn.empty(fn.glob(install_path)) > 0 then
         fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
@@ -23,7 +23,7 @@ return require("packer").startup(function(use)
 
     -- use 'folke/tokyonight.nvim'
     -- use { "ellisonleao/gruvbox.nvim" }
-    -- use 'Mofiqul/vscode.nvim'
+    use 'Mofiqul/vscode.nvim'
     use({
         "projekt0n/github-nvim-theme",
         tag = "v0.0.7",
@@ -151,7 +151,10 @@ return require("packer").startup(function(use)
             local nls = require('null-ls')
             nls.setup({
                 sources = {
-                    -- nls.builtins.formatting.stylua,
+                    nls.builtins.formatting.stylua,
+                    -- nls.builtins.formatting.lua_format,
+                    nls.builtins.formatting.shfmt,
+                    nls.builtins.formatting.hclfmt,
                     nls.builtins.formatting.prettierd,
                 },
             })
@@ -254,8 +257,8 @@ return require("packer").startup(function(use)
         "sansyrox/vim-python-virtualenv",
         config = function()
             vim.cmd([[
-            let g:python_host_prog='.venv/bin/python'
-            let g:python3_host_prog='.venv/bin/python3'
+                let g:python_host_prog='.venv/bin/python'
+                let g:python3_host_prog='.venv/bin/python3'
             ]])
         end,
     })
