@@ -177,7 +177,6 @@ return require("packer").startup(function(use)
                 highlight = {
                   enable = true,
                 },
-
                 ensure_installed = {
                     "bash",
                     "c",
