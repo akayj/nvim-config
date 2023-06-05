@@ -23,6 +23,7 @@ local ensure_installed = {
     "rust",
     "go",
     "gomod",
+    "gosum",
     "python",
 }
 
