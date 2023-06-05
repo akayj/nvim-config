@@ -12,6 +12,8 @@ require("plugins.nvim-tree")
 require("plugins.tab")
 require("plugins.colorizer")
 
+require('plugins/treesitter')
+
 require("plugins.find")
 require("plugins.autopair")
 require("plugins.git")

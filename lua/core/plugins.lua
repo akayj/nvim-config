@@ -173,52 +173,7 @@ return require("packer").startup(function(use)
 
     use("ray-x/go.nvim")
     use("ray-x/guihua.lua") -- recommended if need floating window support
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        config = function()
-            local ts_config = require("nvim-treesitter.configs")
-            ts_config.setup({
-                highlight = {
-                  enable = true,
-                },
-                ensure_installed = {
-                    "bash",
-                    "c",
-                    "css",
-                    "javascript",
-                    "json",
-                    "lua",
-                    "luadoc",
-                    "luap",
-                    "markdown",
-                    "markdown_inline",
-                    "tsx",
-                    "typescript",
-                    "vim",
-                    "vimdoc",
-                    "yaml",
-                    "toml",
-                    "rust",
-                    "go",
-                    "python",
-                },
-
-                incremental_selection = {
-                    enable = false,
-                    keymaps = {
-                        init_selection = '<cr>',
-                        node_incremental = '<cr>',
-                        node_decremental = '<cr>',
-                        scope_incremental = '<cr>',
-                    }
-                },
-
-                indent = {
-                    enable = true
-                }
-            })
-        end,
-    })
+    use("nvim-treesitter/nvim-treesitter")
 
     use({ "simrat39/rust-tools.nvim", requires = "neovim/nvim-lspconfig" })
 
