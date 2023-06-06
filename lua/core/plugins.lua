@@ -156,6 +156,13 @@ return require("packer").startup(function(use)
 	})
 	-- Configurations for Nvim LSP
 
+    use {
+        "ray-x/lsp_signature.nvim",
+        config = function()
+            require('lsp_signature').setup({})
+        end,
+    }
+
 	use("ray-x/go.nvim")
 	use("ray-x/guihua.lua") -- recommended if need floating window support
 	use("nvim-treesitter/nvim-treesitter")

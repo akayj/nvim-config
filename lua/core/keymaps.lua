@@ -11,6 +11,7 @@ keymap.set("n", "<leader>sh", "<C-w>s")
 keymap.set("n", "<leader>h", ":nohl<CR>")
 
 keymap.set("n", "<C-s>", ":w<CR>")
+keymap.set("n", "<leader>w", ":w<CR>")
 keymap.set("n", "<leader>n", ":NvimTreeToggle<CR>")
 
 keymap.set("n", "<leader>d", ":bd<CR>")
