@@ -40,7 +40,6 @@ return require("packer").startup(function(use)
 		requires = { "nvim-tree/nvim-web-devicons" },
 	})
 
-	-- using packer.nvim
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 
 	use({
@@ -48,6 +47,11 @@ return require("packer").startup(function(use)
 		-- requires = { "kyazdani42/nvim-web-devicons", opt = true },
 		requires = { "nvim-tree/nvim-web-devicons", opt = true },
 	})
+
+    use {
+        "folke/todo-comments.nvim",
+        requires = { "nvim-lua/plenary.nvim" },
+    }
 
 	-- Load on an autocommand event
 	-- use {'andymass/vim-matchup', event = 'VimEnter'}

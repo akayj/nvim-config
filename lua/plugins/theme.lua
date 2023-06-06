@@ -10,15 +10,16 @@ require("github-theme").setup({
   -- Overwrite the highlight groups
   overrides = function(c)
     return {
-      htmlTag = {fg = c.red, bg = "#282c34", sp = c.hint, style = "underline"},
-      DiagnosticHint = {link = "LspDiagnosticsDefaultHint"},
-      -- this will remove the highlight groups
-      TSField = {},
+        htmlTag = {fg = c.red, bg = "#282c34", sp = c.hint, style = "underline"},
+        DiagnosticHint = {link = "LspDiagnosticsDefaultHint"},
+        -- this will remove the highlight groups
+        TSField = {},
     }
   end
 })
 
 -- vim.o.background = 'dark'
 -- vim.cmd([[colorscheme github_dark]])
+-- vim.cmd([[colorscheme github_light]])
 -- vim.cmd([[colorscheme habamax]])
 vim.cmd([[colorscheme vscode]])
