@@ -3,6 +3,7 @@ local ensure_installed = {
     "bash",
     "c",
     "css",
+    "cpp",
     "dockerfile",
     "javascript",
     "json",

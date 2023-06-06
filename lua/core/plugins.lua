@@ -19,19 +19,13 @@ local packer_bootstrap = ensure_packer()
 -- ]])
 
 return require("packer").startup(function(use)
-    use("wbthomason/packer.nvim")
+    -- Packer can manage itself
+    use "wbthomason/packer.nvim"
 
     -- use 'folke/tokyonight.nvim'
     -- use { "ellisonleao/gruvbox.nvim" }
     use 'Mofiqul/vscode.nvim'
-    use({
-        "projekt0n/github-nvim-theme",
-        tag = "v0.0.7",
-        -- config = function()
-        --     require('github-theme').setup({})
-        --     -- vim.cmd('colorscheme github_light')
-        -- end
-    })
+    use { "projekt0n/github-nvim-theme", tag = "v0.0.7", }
 
     -- use { "ellisonleao/gruvbox.nvim" }
 
@@ -54,6 +48,9 @@ return require("packer").startup(function(use)
         -- requires = { "kyazdani42/nvim-web-devicons", opt = true },
         requires = { "nvim-tree/nvim-web-devicons", opt = true },
     })
+
+     -- Load on an autocommand event
+    -- use {'andymass/vim-matchup', event = 'VimEnter'}
 
     use("famiu/bufdelete.nvim")
     use("lukas-reineke/indent-blankline.nvim")
@@ -162,13 +159,13 @@ return require("packer").startup(function(use)
         end,
     }
 
-    use({
+    use {
         "neovim/nvim-lspconfig",
         requires = "nvim-lua/lsp-status.nvim",
         config = function()
             require("lsp-status").register_progress()
         end,
-    })
+    }
     -- Configurations for Nvim LSP
 
     use("ray-x/go.nvim")
@@ -189,21 +186,21 @@ return require("packer").startup(function(use)
 
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
-    use({
+    use {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.x",
         -- or                            , branch = '0.1.x',
         -- event = "VimEnter",
         requires = { { "nvim-lua/plenary.nvim" } },
-    })
+    }
 
-    use({
+    use {
         "akayj/yapf.nvim",
         requires = { "nvim-lua/plenary.nvim" },
         config = function()
             require("yapf").setup({})
         end,
-    })
+    }
 
     -- use {
     --     'stsewd/isort.nvim',
@@ -243,15 +240,15 @@ return require("packer").startup(function(use)
         end,
     })
 
-    use({ "raimon49/requirements.txt.vim", event = { "BufRead *requirements.txt" } })
+    use { "raimon49/requirements.txt.vim", event = { "BufRead *requirements.txt" } }
 
-    use({
+    use {
         "ckipp01/stylua-nvim",
         run = "cargo install stylua",
         config = function()
             require("stylua-nvim").setup()
         end,
-    })
+    }
 
     use({
         "stevearc/aerial.nvim",
@@ -260,9 +257,7 @@ return require("packer").startup(function(use)
         end,
     })
 
-    use({
-        "norcalli/nvim-colorizer.lua",
-    })
+    use "norcalli/nvim-colorizer.lua"
 
     use({
         'dcampos/nvim-snippy',
