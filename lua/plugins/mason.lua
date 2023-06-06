@@ -18,6 +18,7 @@ local servers = {
     "bashls",
     "rust_analyzer",
     "gopls",
+    "dockerls",
 }
 
 mason.setup({
