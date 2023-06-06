@@ -26,6 +26,7 @@ local ensure_installed = {
     "gomod",
     "gosum",
     "python",
+    "proto",
 }
 
 local opts = {
