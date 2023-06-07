@@ -1,11 +1,17 @@
 local opt = vim.opt
+local has = vim.fn.has
 
 opt.number = true
 
-opt.guifont = "Jetbrains Mono:h11"
--- opt.guifont = "Fira Code Retina:h11"
--- 设置中文字体
-opt.guifontwide = "Microsoft YaHei Mono:h10"
+if has('gui_running') then
+    opt.guifont = "Jetbrains Mono:h11"
+    if has('win32') then
+        -- 设置中文字体
+        opt.guifontwide = "Microsoft YaHei Mono:h10"
+    elseif has('macunix') or has('macos') then
+        print("macos")
+    end
+end
 
 opt.tabstop = 4
 opt.softtabstop = 4
@@ -30,9 +36,9 @@ opt.smartcase = true
 opt.termguicolors = true
 opt.signcolumn = "yes"
 
-vim.o.backup = fasle
-vim.o.swapfile = fasle
-vim.o.writebackup = fasle
+vim.o.backup = false
+vim.o.swapfile = false
+vim.o.writebackup = false
 
 vim.wo.list = true
 vim.opt.listchars = { tab = "→ ", trail = "•", extends = "»", precedes = "«" }
