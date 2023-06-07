@@ -9,7 +9,8 @@ if not status_ok_1 then
     return
 end
 
-local servers = {
+
+local lsp_servers = {
     "cssls",
     "html",
     "jsonls",
@@ -19,6 +20,7 @@ local servers = {
     "rust_analyzer",
     "gopls",
     "dockerls",
+    "lua_ls",
 }
 
 mason.setup({
@@ -34,6 +36,6 @@ mason.setup({
 })
 
 mason_lspconfig.setup {
-    ensure_installed = servers,
+    ensure_installed = lsp_servers,
     automatic_installation = true,
 }

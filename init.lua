@@ -19,7 +19,6 @@ require("plugins.autopair")
 require("plugins.git")
 
 require('plugins.todo-comments')
-
 require("plugins.cmp")
 
 require("plugins.mason")

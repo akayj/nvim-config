@@ -71,6 +71,26 @@ require('lspconfig').gopls.setup{
   },
 }
 
+require('lspconfig').lua_ls.setup {
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+            },
+
+            diagnostics = {
+                globals = {'vim'},
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+}
+
 require('lspconfig')['pyright'].setup{
     -- on_attach = on_attach,
     on_attach = function (c, b)
