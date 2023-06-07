@@ -9,6 +9,7 @@ local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup {
     debug = false,
+    root_dir = require('null-ls.utils').root_pattern("Makefile", ".git"),
     sources = {
         formatting.prettier.with {
             extra_filetypes = { "toml", "solidity" },
@@ -18,7 +19,7 @@ null_ls.setup {
         formatting.stylua,
         formatting.shfmt,
         formatting.rustfmt,
-        formatting.google_java_format,
+        -- formatting.google_java_format,
 
         diagnostics.shellcheck,
     },

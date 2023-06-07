@@ -25,6 +25,10 @@ local lsp_servers = {
 
 mason.setup({
     border = "rounded",
+    ensure_installed = {
+        "stylua",
+        "shfmt",
+    },
     ui = {
         icons = {
             package_installed = "✓",

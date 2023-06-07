@@ -10,8 +10,11 @@ map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
 
 -- Pin/unpin buffer
 map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+
 -- Close buffer
 map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+map('n', '<A-k>', '<Cmd>BufferCloseBuffersRight<CR>', opts)
+map('n', '<A-u>', '<Cmd>BufferCloseBuffersLeft<CR>', opts)
 
 -- Sort automatically by...
 map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
