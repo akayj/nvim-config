@@ -21,6 +21,8 @@ local lsp_servers = {
     "gopls",
     "dockerls",
     "lua_ls",
+    "pyright",
+    "volar", -- LSP for Vue
 }
 
 mason.setup({
@@ -43,3 +45,10 @@ mason_lspconfig.setup {
     ensure_installed = lsp_servers,
     automatic_installation = true,
 }
+
+-- TODO: 如何定制每个lsp的配置
+-- mason_lspconfig.setup_handlers {
+--     function (server_name)
+--         require('lspconfig')[server_name].setup {}
+--     end
+-- }
