@@ -23,7 +23,7 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- use 'folke/tokyonight.nvim'
-	-- use { "ellisonleao/gruvbox.nvim" }
+	use { "ellisonleao/gruvbox.nvim" }
 	use("Mofiqul/vscode.nvim")
 	use({ "projekt0n/github-nvim-theme", tag = "v0.0.7" })
 
