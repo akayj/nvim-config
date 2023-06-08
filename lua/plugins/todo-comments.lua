@@ -7,7 +7,7 @@ end
 local keymap = vim.keymap
 
 keymap.set("n", "]t", function() tc.jump_next() end, { desc = "Next todo comment" })
-keymap.set("n", "[t", function() tc.jump_next() end, { desc = "Previous todo comment" })
+keymap.set("n", "[t", function() tc.jump_prev() end, { desc = "Previous todo comment" })
 
 keymap.set("n", "[e", function()
     tc.jump_next({ keyword = { "ERROR", "WARNING" }})
