@@ -49,6 +49,15 @@ return require("packer").startup(function(use)
 	})
 
     use {
+        'rcarriga/nvim-notify',
+        config = function ()
+            local notify = require('notify')
+            vim.notify = notify
+            notify.setup {}
+        end
+    }
+
+    use {
         "folke/todo-comments.nvim",
         requires = { "nvim-lua/plenary.nvim" },
     }
@@ -62,24 +71,18 @@ return require("packer").startup(function(use)
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
-			-- 'neovim/nvim-lspconfig',
-			-- 'hrsh7th/cmp-nvim-lsp',
-			-- 'L3MON4D3/LuaSnip',
-			-- 'saadparwaiz1/cmp_luasnip',
-			-- 'hrsh7th/cmp-buffer',
-
-			"neovim/nvim-lspconfig",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-
 			-- For luasnip users.
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
 
-			-- "octaltree/cmp-look",
-			-- "tzachar/cmp-tabnine"
+			"neovim/nvim-lspconfig",
+
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
 		},
 	})
 

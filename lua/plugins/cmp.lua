@@ -16,13 +16,15 @@ cmp.setup({
   }),
 
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    -- { name = 'vsnip' }, -- For vsnip users.
+    { name = 'nvim_lsp' }, -- LSP
+    { name = 'nvim_lsp_signature_help' }, -- LSP for parameters in functions
+    { name = 'nvim_lua' }, -- Lua NeoVim API
     { name = 'luasnip' }, -- For luasnip users.
+    { name = 'buffer' }, -- Buffers
+    { name = 'path' }, -- Paths
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
   }, {
-    { name = 'buffer' },
   }),
 
 })
