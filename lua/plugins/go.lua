@@ -22,5 +22,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 
 require('go').setup({
-  lsp_inlay_hints = { enable = true },
+    lsp_inlay_hints = { enable = true },
+
+    lsp_cfg = false,
 })
+
+local cfg = require("go.lsp").config()
+require('lspconfig').gopls.setup(cfg)

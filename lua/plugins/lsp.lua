@@ -43,33 +43,33 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
-require('lspconfig').gopls.setup{
-  -- on_attach = on_attach,
-  on_attach = function (c, b)
-    local ih = require('inlay-hints')
-    ih.on_attach(c, b)
-
-    on_attach(c, b);
-  end,
-
-  flags = lsp_flags,
-
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
-
-  settings = {
-    gopls = {
-      hints = {
-        assignVariableTypes = true,
-        compositeLiteralFields = true,
-        compositeLiteralTypes = true,
-        constantValues = true,
-        functionTypeParameters = true,
-        parameterNames = true,
-        rangeVariableTypes = true,
-      },
-    },
-  },
-}
+-- require('lspconfig').gopls.setup{
+--   -- on_attach = on_attach,
+--   on_attach = function (c, b)
+--     local ih = require('inlay-hints')
+--     ih.on_attach(c, b)
+--
+--     on_attach(c, b);
+--   end,
+--
+--   flags = lsp_flags,
+--
+--   -- capabilities = require('cmp_nvim_lsp').default_capabilities(),
+--
+--   settings = {
+--     gopls = {
+--       hints = {
+--         assignVariableTypes = true,
+--         compositeLiteralFields = true,
+--         compositeLiteralTypes = true,
+--         constantValues = true,
+--         functionTypeParameters = true,
+--         parameterNames = true,
+--         rangeVariableTypes = true,
+--       },
+--     },
+--   },
+-- }
 
 require('lspconfig').lua_ls.setup {
     settings = {
