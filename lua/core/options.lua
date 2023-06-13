@@ -3,13 +3,13 @@ local has = vim.fn.has
 
 opt.number = true
 
+local iswin = vim.uv.os_uname().version:find("Windows")
+
 if has('gui_running') then
     opt.guifont = "Jetbrains Mono:h11"
-    if has('win32') then
+    if iswin then
         -- 设置中文字体
         opt.guifontwide = "Microsoft YaHei Mono:h10"
-    elseif has('macunix') or has('macos') then
-        print("macos")
     end
 end
 
