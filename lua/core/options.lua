@@ -3,7 +3,8 @@ local has = vim.fn.has
 
 opt.number = true
 
-local iswin = vim.uv.os_uname().version:find("Windows")
+-- local iswin = vim.uv.os_uname().version:find("Windows")
+local iswin = has('win32')
 
 if has('gui_running') then
     opt.guifont = "Jetbrains Mono:h11"

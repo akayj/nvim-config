@@ -71,7 +71,9 @@ local lsp_flags = {
 --   },
 -- }
 
-require('lspconfig').lua_ls.setup {
+local lspconfig = require('lspconfig')
+
+lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             runtime = {
@@ -91,7 +93,7 @@ require('lspconfig').lua_ls.setup {
     },
 }
 
-require('lspconfig')['pyright'].setup{
+lspconfig['pyright'].setup{
     -- on_attach = on_attach,
     on_attach = function (c, b)
       local ih = require('inlay-hints')
@@ -102,7 +104,7 @@ require('lspconfig')['pyright'].setup{
     flags = lsp_flags,
 }
 
-require('lspconfig')['tsserver'].setup{
+lspconfig['tsserver'].setup{
     -- on_attach = on_attach,
     on_attach = function (c, b)
       local ih = require('inlay-hints')
@@ -113,7 +115,7 @@ require('lspconfig')['tsserver'].setup{
     flags = lsp_flags,
 }
 
-require('lspconfig')['rust_analyzer'].setup{
+lspconfig['rust_analyzer'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
     -- Server-specific settings...
