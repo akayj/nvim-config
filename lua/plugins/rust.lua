@@ -1,6 +1,6 @@
 local rt = require('rust-tools')
 
-local function on_attach(client, buffer)
+local function on_attach(_, buffer)
     local keymap_opts = { buffer = buffer }
     -- Code navigation and shortcuts
     vim.keymap.set("n", "<c-]>", vim.lsp.buf.definition, keymap_opts)
