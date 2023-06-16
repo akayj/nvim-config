@@ -23,7 +23,7 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- use 'folke/tokyonight.nvim'
-	use { "ellisonleao/gruvbox.nvim" }
+	use({ "ellisonleao/gruvbox.nvim" })
 	use("Mofiqul/vscode.nvim")
 	use({ "projekt0n/github-nvim-theme", tag = "v0.0.7" })
 
@@ -48,19 +48,19 @@ return require("packer").startup(function(use)
 		requires = { "nvim-tree/nvim-web-devicons", opt = true },
 	})
 
-    use {
-        'rcarriga/nvim-notify',
-        config = function ()
-            local notify = require('notify')
-            vim.notify = notify
-            notify.setup {}
-        end
-    }
+	use({
+		"rcarriga/nvim-notify",
+		config = function()
+			local notify = require("notify")
+			vim.notify = notify
+			notify.setup({})
+		end,
+	})
 
-    use {
-        "folke/todo-comments.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
-    }
+	use({
+		"folke/todo-comments.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
 
 	-- Load on an autocommand event
 	-- use {'andymass/vim-matchup', event = 'VimEnter'}
@@ -159,18 +159,19 @@ return require("packer").startup(function(use)
 	})
 	-- Configurations for Nvim LSP
 
-    use {
-        "ray-x/lsp_signature.nvim",
-        config = function()
-            require('lsp_signature').setup({})
-        end,
-    }
+	use({
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").setup({})
+		end,
+	})
 
-	use("ray-x/go.nvim")
-	use("ray-x/guihua.lua") -- recommended if need floating window support
-	use("nvim-treesitter/nvim-treesitter")
+	use({
+		"ray-x/go.nvim",
+		requires = { "ray-x/guihua.lua", "nvim-treesitter/nvim-treesitter" },
+	})
 
-	use({ "simrat39/rust-tools.nvim", requires = "neovim/nvim-lspconfig" })
+	-- use({ "simrat39/rust-tools.nvim", requires = "neovim/nvim-lspconfig" })
 
 	-- Debugging
 	use("nvim-lua/plenary.nvim")
@@ -255,7 +256,8 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use("norcalli/nvim-colorizer.lua")
+	-- use("norcalli/nvim-colorizer.lua")
+	use("NvChad/nvim-colorizer.lua")
 
 	use({
 		"dcampos/nvim-snippy",
