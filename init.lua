@@ -1,37 +1,21 @@
-require("core.options")
-require("core.keymaps")
-require('core.plugins')
+require "core"
 
-require("plugins.theme")
+local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
 
-require("plugins.bufferline")
-require("plugins.lualine")
-require("plugins.blank")
+if custom_init_path then
+  dofile(custom_init_path)
+end
 
-require("plugins.nvim-tree")
-require("plugins.tab")
-require("plugins.colorizer")
+require("core.utils").load_mappings()
 
-require('plugins.treesitter')
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
-require('plugins.find')
-require("plugins.autopair")
-require("plugins.git")
+-- bootstrap lazy.nvim!
+if not vim.loop.fs_stat(lazypath) then
+  require("core.bootstrap").gen_chadrc_template()
+  require("core.bootstrap").lazy(lazypath)
+end
 
-require('plugins.todo-comments')
-require("plugins.cmp")
-
-require("plugins.mason")
-require("plugins.aerial")
-
-require("plugins.lsp")
-
--- TODO: maybe use another inlay
-require("plugins.inlay")
-require("plugins/null-ls")
-
-require("plugins.go")
-require("plugins.rust")
--- require("plugins.lua")
-
-require('plugins.snippets')
+dofile(vim.g.base46_cache .. "defaults")
+vim.opt.rtp:prepend(lazypath)
+require "plugins"
