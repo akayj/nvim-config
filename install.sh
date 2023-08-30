@@ -19,8 +19,9 @@ https_curl() {
 readonly https_curl
 
 install_nvim() {
-	command -v nvim >/dev/null || {
-		echo 'install nvim first'
+	command -v nvim >/dev/null && {
+		echo 'nvim is installed'
+		return
 	}
 
 	local os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
