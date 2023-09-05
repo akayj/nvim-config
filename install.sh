@@ -19,9 +19,14 @@ https_curl() {
 readonly https_curl
 
 install_nvim() {
+	local arg="${1:-}"
+
 	command -v nvim >/dev/null && {
-		echo 'nvim is installed'
-		return
+		printf 'nvim %s is installed\n' $(nvim -v | head -n 1 | awk '{print $2}')
+		if [ "${arg}" != '-f' ]; then
+			return
+		fi
+		echo "force to install"
 	}
 
 	local os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -48,4 +53,4 @@ install_nvim() {
 
 readonly install_nvim
 
-install_nvim
+install_nvim "$@"
