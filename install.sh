@@ -60,6 +60,8 @@ function https_curl() {
 	curl --progress-bar -fLO "${url}"
 }
 
+readonly https_curl
+
 function install_nvim() {
 	local arg="${1:-}"
 
@@ -92,5 +94,7 @@ function install_nvim() {
 		;;
 	esac
 }
+
+readonly install_nvim
 
 install_nvim "$@" || log::fatal "failed"
