@@ -56,17 +56,31 @@ function log::fatal() {
 	exit "$exit_code"
 }
 
+declare curl_version
+curl_version="$(curl -V | head -n 1 | cut -d ' ' -f 2)"
+readonly curl_version
+
 function https_curl() {
+	if [[ $(echo "${curl_version} 7.20.0" | awk '{print ($1 > $2)}') -eq 1 ]]; then
+		curl --proto '=https' --tlsv1.2 $@
+	else
+		curl --tlsv1.2 $@
+	fi
+}
+
+readonly https_curl
+
+function download_url() {
 	local url="${1:-}"
 
 	if [ "${url}" == "" ]; then
 		return 1
 	fi
 
-	curl --progress-bar -fLO "${url}"
+	https_curl --progress-bar -fLO "${url}"
 }
 
-readonly https_curl
+readonly download_url
 
 function nvim_version() {
 	if command -v nvim >/dev/null; then
@@ -93,25 +107,25 @@ function install_nvim() {
 	case "${os_name}" in
 	"darwin")
 		file_url=$(printf "${RELEASE_URL}" "macos" "tar.gz")
-		https_curl "$file_url"
+		download_url "$file_url"
 		xattr -c ./nvim-macos.tar.gz
 		;;
 
 	"linux")
 		checksum_url=$(printf "${RELEASE_URL}" "linux64" "tar.gz.sha256sum")
-		https_curl "$checksum_url"
+		download_url "$checksum_url"
 
 		file_url=$(printf "${RELEASE_URL}" "linux64" "tar.gz")
 		if [ -f 'nvim-linux64.tar.gz' ]; then
 			if ! sha256sum -c "nvim-linux64.tar.gz.sha256sum"; then
-				log::warn "invalid tarball, download..."
-				https_curl "$file_url"
+				log::error "invalid tarball, download..."
+				download_url "$file_url"
 				if ! sha256sum -c "nvim-linux64.tar.gz.sha256sum"; then
 					log::fatal "invalid tarball"
 				fi
 			fi
 		else
-			https_curl "$file_url"
+			download_url "$file_url"
 			if ! sha256sum -c "nvim-linux64.tar.gz.sha256sum"; then
 				log::fatal "invalid tarball"
 			fi
