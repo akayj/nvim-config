@@ -6,7 +6,13 @@ set -o nounset
 
 readonly RELEASE_URL='https://github.com/neovim/neovim/releases/download/nightly/nvim-%s.%s'
 
-[ -f "./lib/colors.sh" ] && source "./lib/colors.sh"
+# [ -f "./lib/colors.sh" ] && source "./lib/colors.sh"
+readonly Red='31'       # Red
+readonly Purple='35'    # Purple
+readonly BRed='1;31'    # Red
+readonly BGreen='1;32'  # Green
+readonly BYellow='1;33' # Yellow
+readonly BBlue='1;34'   # Blue
 
 function expand_color() {
 	local colors="${1:-}"
@@ -31,13 +37,13 @@ function color_message() {
 }
 
 # log::debug() { color_message '35' "$@"; }
-function log::debug() { color_message '1,35' "$@"; }
-function log::success() { color_message 32 "$@"; }
+function log::debug() { color_message "$BBlue" "$@"; }
+function log::success() { color_message "$BGreen" "$@"; }
 # shellcheck disable=SC2317
-function log::warn() { color_message 33 "$@"; }
-function log::info() { color_message 34 "$@"; }
+function log::warn() { color_message "$BYellow" "$@"; }
+function log::info() { color_message "$Purple" "$@"; }
 # shellcheck disable=SC2317
-function log::error() { color_message 31 "$@" >&2; }
+function log::error() { color_message "$BRed" "$@" >&2; }
 
 function log::fatal() {
 	local message=${1:-}
@@ -62,16 +68,24 @@ function https_curl() {
 
 readonly https_curl
 
-function install_nvim() {
-	local arg="${1:-}"
+function nvim_version() {
+	if command -v nvim >/dev/null; then
+		echo $(nvim -v | head -n 1 | awk '{print $2}')
+	fi
+}
 
-	command -v nvim >/dev/null && {
-		log::success "nvim %s is already installed" $(nvim -v | head -n 1 | awk '{print $2}')
-		if [ "${arg}" != '-f' ]; then
+function install_nvim() {
+	local force="${1:-}"
+	local old_version=$(nvim_version)
+
+	if [ "${old_version}" != "" ]; then
+		log::info "nvim %s was installed" "${old_version}"
+		if [ "${force}" != "-f" ]; then
 			return
+		else
+			log::warn 'force to install'
 		fi
-		log::warn 'force to install'
-	}
+	fi
 
 	local os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
 	local file_url=''
@@ -84,8 +98,41 @@ function install_nvim() {
 		;;
 
 	"linux")
+		checksum_url=$(printf "${RELEASE_URL}" "linux64" "tar.gz.sha256sum")
+		https_curl "$checksum_url"
+
 		file_url=$(printf "${RELEASE_URL}" "linux64" "tar.gz")
-		https_curl "$file_url"
+		if [ -f 'nvim-linux64.tar.gz' ]; then
+			if ! sha256sum -c "nvim-linux64.tar.gz.sha256sum"; then
+				log::warn "invalid tarball, download..."
+				https_curl "$file_url"
+				if ! sha256sum -c "nvim-linux64.tar.gz.sha256sum"; then
+					log::fatal "invalid tarball"
+				fi
+			fi
+		else
+			https_curl "$file_url"
+			if ! sha256sum -c "nvim-linux64.tar.gz.sha256sum"; then
+				log::fatal "invalid tarball"
+			fi
+		fi
+
+		if [ -d "${HOME}/nvim-linux64" ]; then
+			rm -rf "${HOME}/nvim-linux64" || log::fatal 'remove old dir failed'
+		fi
+
+		log::info 'untar...'
+		tar -C "${HOME}" -xvf nvim-linux64.tar.gz >/dev/null
+
+		log::info 'linking...'
+		ln -s -f "${HOME}/nvim-linux64" "${HOME}/nvim_home"
+
+		local new_version=$(nvim_version)
+		if [ "${old_version}" == '' ]; then
+			log::success "new nvim %s installed" "${new_version}"
+		else
+			log::success "nvim upgraded, %s -> %s" "${old_version}" "${new_version}"
+		fi
 		;;
 
 	*)
