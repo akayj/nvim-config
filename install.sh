@@ -130,8 +130,10 @@ function install_nvim() {
 		local new_version=$(nvim_version)
 		if [ "${old_version}" == '' ]; then
 			log::success "new nvim %s installed" "${new_version}"
-		else
+		elif [ "${old_version}" != "${new_version}" ]; then
 			log::success "nvim upgraded, %s -> %s" "${old_version}" "${new_version}"
+		else
+			log::success "nvim %s reinstalled" "${new_version}"
 		fi
 		;;
 
