@@ -18,7 +18,7 @@ readonly BBlue='1;34'   # Blue
 function expand_color() {
 	local colors="${1:-${WHITE}}"
 
-	echo "${colors}" | awk -F ',' '{
+	echo "${colors}" | awk -F ';' '{
     if ($2 == "") print 0";"$1;
     else print $1";"$2;
   }'
@@ -136,7 +136,7 @@ function download_and_check() {
 	if [ -f "${filename}" ]; then
 		if [ "${check}" == 'y' ]; then
 			# check sha256sum
-			download_url "${url}.sha256sum"
+			download_url "${url}.sha256sum" || exit 1
 			log::log 'checking local tarball...'
 			if check_file "${filename}" >/dev/null; then
 				log::success 'success'
@@ -146,7 +146,7 @@ function download_and_check() {
 		fi
 	fi
 
-	download_url "${url}"
+	download_url "${url}" || exit 1
 	log::log 'check new file again...'
 	check_file "${filename}" || {
 		log::error 'Fail'
@@ -213,8 +213,8 @@ function install_nvim() {
 		file_url=$(printf "${RELEASE_URL}" "macos" "tar.gz")
 		checksum_url="${file_url}.sha256sum"
 
-		download_and_check "${file_url}" && xattr -c ./nvim-macos.tar.gz
-		relink 'nvim-macos'
+		download_and_check "${file_url}" || exit 1
+		xattr -c ./nvim-macos.tar.gz && relink 'nvim-macos'
 		;;
 
 	"linux")
