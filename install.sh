@@ -19,8 +19,8 @@ function expand_color() {
 	local colors="${1:-${WHITE}}"
 
 	echo "${colors}" | awk -F ';' '{
-    if ($2 == "") print 0";"$1;
-    else print $1";"$2;
+  if ($2 == "") print 0";"$1;
+  else print $1";"$2;
   }'
 }
 
