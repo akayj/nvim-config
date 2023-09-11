@@ -18,15 +18,14 @@ readonly BBlue='1;34'   # Blue
 function expand_color() {
 	local colors="${1:-${WHITE}}"
 
-	echo "${colors}" | awk -F ';' '{
-  if ($2 == "") print 0";"$1;
-  else print $1";"$2;
-  }'
+	echo "${colors}" | awk -F ';' '{ if ($2 == "") print 0";"$1; else print $1";"$2; }'
 }
 
 function color_message() {
-	local color="$(expand_color $1)"
+	local color
+	color=$(expand_color "$1")
 	shift
+
 	local template="$1"
 	shift
 
@@ -76,9 +75,9 @@ readonly curl_version
 
 function https_curl() {
 	if [[ $(echo "${curl_version} 7.20.0" | awk '{print ($1 > $2)}') -eq 1 ]]; then
-		curl --proto '=https' --tlsv1.2 $@
+		curl --proto '=https' --tlsv1.2 "$@"
 	else
-		curl --tlsv1.2 $@
+		curl --tlsv1.2 "$@"
 	fi
 }
 
@@ -98,7 +97,7 @@ readonly download_url
 
 function nvim_version() {
 	if command -v nvim >/dev/null; then
-		echo $(nvim -v | head -n 1 | awk '{print $2}')
+		nvim -v | head -n 1 | awk '{print $2}'
 	fi
 }
 
@@ -168,11 +167,11 @@ function relink() {
 	fi
 
 	if [ -d "${nvim_home}/${top_dir}" ]; then
-		rm -rf "${nvim_home}/${top_dir}" || log::fatal 'remove old dir failed'
+		rm -rf "${nvim_home:?}/${top_dir}" || log::fatal 'remove old dir failed'
 	fi
 
 	log::log 'untar...'
-	tar -C "${nvim_home}" -xf ${top_dir}.tar.gz >/dev/null
+	tar -C "${nvim_home}" -xf "${top_dir}.tar.gz" >/dev/null
 	log::success 'done'
 
 	log::log 'linking...'
@@ -192,7 +191,8 @@ function relink() {
 readonly relink
 
 function current_shell_rc() {
-	local current_shell=$(basename "$SHELL")
+	local current_shell
+	current_shell=$(basename "$SHELL")
 
 	case ${current_shell} in
 	"zsh")
