@@ -176,6 +176,7 @@ function relink() {
 	log::success 'done'
 
 	log::log 'linking...'
+  [ -L "${nvim_home}/nvim_home" ] || log::warn 'MUST keep %s in APTH' "${nvim_home}/nvim_home/bin"
 	ln -s -f "${nvim_home}/${top_dir}" "${nvim_home}/nvim_home"
 	log::success 'done'
 
