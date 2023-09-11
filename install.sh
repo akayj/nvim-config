@@ -125,6 +125,7 @@ function check_file() {
 function download_and_check() {
 	local url="${1:-}"
 	local check="${2:-y}"
+
 	if [ -z "${url}" ]; then
 		log::error 'empty url'
 		return 1
@@ -132,27 +133,39 @@ function download_and_check() {
 
 	local filename=$(basename "${url}")
 
-	if [ -f "${filename}" ]; then
-		if [ "${check}" == 'y' ]; then
-			# check sha256sum
-			download_url "${url}.sha256sum" || exit 1
-			log::log 'checking local tarball...'
-			if check_file "${filename}" >/dev/null; then
-				log::success 'success'
-				return
-			fi
-			log::warn 'invalid, redownload'
-		fi
-	fi
+  if [ ! -f "${filename}" ]; then
+    log::log 'downlading %s...' "${filename}"
+    download_url "${url}" > /dev/null || return 1
+    log::success 'OK'
+  else
+    read -p 'Found local tarball, use it [y/N]: ' yesNo
+    case "${yesNo}" in
+      [Yy]*)
+        log::log 'download new tarbar...'
+        download_url "${url}" > /dev/null 2>&1 || { log::error 'Fail'; return 2; }
+        log::success 'OK'
+        ;;
 
-	download_url "${url}" || exit 1
-	log::log 'check new file again...'
-	check_file "${filename}" || {
-		log::error 'Fail'
-		return 1
-	}
+      [Nn]*)
+        log::info 'Use local tarball'
+        ;;
 
-	log::success 'OK'
+      *)
+        log::error 'Unknown answer, quit'
+        ;;
+    esac
+  fi
+
+  if [ "${check}" == 'y' ]; then
+    log::log 'Checking sha256sum...'
+    download_url "${url}.sha256sum" > /dev/null 2>&1 || return 1
+    if check_file "${filename}" >/dev/null; then
+      log::success 'Ok'
+      return
+    fi
+    log::error 'Fail'
+    return 1
+  fi
 }
 
 readonly download_and_check
