@@ -12,7 +12,7 @@ readonly Red='31'       # Red
 readonly Purple='35'    # Purple
 readonly BRed='1;31'    # Red
 readonly BGreen='32'    # Green
-readonly BYellow='1;33' # Yellow
+readonly BYellow='0;33' # Yellow
 readonly BBlue='1;34'   # Blue
 
 function expand_color() {
@@ -176,7 +176,6 @@ function relink() {
 	log::success 'done'
 
 	log::log 'linking...'
-  [ -L "${nvim_home}/nvim_home" ] || log::warn 'MUST keep %s in APTH' "${nvim_home}/nvim_home/bin"
 	ln -s -f "${nvim_home}/${top_dir}" "${nvim_home}/nvim_home"
 	log::success 'done'
 
@@ -191,6 +190,20 @@ function relink() {
 }
 
 readonly relink
+
+function current_shell_rc() {
+	local current_shell=$(basename "$SHELL")
+
+	case ${current_shell} in
+	"zsh")
+		echo "${HOME}/.zshrc"
+		;;
+
+	"bash")
+		echo "${HOME}/.bashrc"
+		;;
+	esac
+}
 
 function install_nvim() {
 	local force="${1:-}"
@@ -236,3 +249,6 @@ function install_nvim() {
 readonly install_nvim
 
 install_nvim "$@" || log::fatal "failed"
+
+log::info 'If this is your first ime to install, update PATH for nvim, or else ignore this:'
+log::info '  echo "export PATH=$PATH:%s" >> %s' "${HOME}/nvim_home/bin" "$(current_shell_rc)"
