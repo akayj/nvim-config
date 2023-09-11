@@ -268,5 +268,5 @@ readonly install_nvim
 
 install_nvim "$@" || log::fatal "failed"
 
-log::info 'If this is your first ime to install, update PATH for nvim, or else ignore this:'
+log::info 'If this is your first time to install, update PATH for nvim, or else ignore this:'
 log::info '  echo "export PATH=$PATH:%s" >> %s' "${HOME}/nvim_home/bin" "$(current_shell_rc)"
