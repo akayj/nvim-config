@@ -248,6 +248,11 @@ function install_nvim() {
 
 readonly install_nvim
 
+[ -d '~/.config/nvim' ] || {
+	git clone https://github.com/NvChad/NvChad.git ~/.config/nvim --depth=1
+	git clone https://github.com/akayj/nvim-config.git ~/.config/nvim/custom --depth=1
+}
+
 install_nvim "$@" || log::fatal "failed"
 
 log::info 'If this is your first ime to install, update PATH for nvim, or else ignore this:'
