@@ -96,8 +96,16 @@ function download_url() {
 readonly download_url
 
 function nvim_version() {
-	if command -v nvim >/dev/null; then
-		nvim -v | head -n 1 | awk '{print $2}'
+  local home_dir="${1:-}"
+  local nvim_bin
+  if [ -z "${home_dir}" ]; then
+    nvim_bin="nvim"
+  else
+    nvim_bin="${home_dir}/bin/nvim"
+  fi
+
+	if command -v "${nvim_bin}" > /dev/null || [ -x "${nvim_bin}" ]; then
+		"${nvim_bin}" -v | head -n 1 | awk '{print $2}'
 	fi
 }
 
@@ -169,12 +177,14 @@ readonly download_and_check
 function relink() {
 	local top_dir="${1}"
 	local nvim_home="${2:-${HOME}}"
+  local old_version
 
 	if [ -z "${top_dir}" ]; then
 		log::error 'top_dir is required'
 		return 1
 	fi
 
+  old_version=$(nvim_version "${nvim_home}/nvim_home")
 	if [ -d "${nvim_home}/${top_dir}" ]; then
 		rm -rf "${nvim_home:?}/${top_dir}" || log::fatal 'remove old dir failed'
 	fi
@@ -187,13 +197,13 @@ function relink() {
 	ln -s -f "${nvim_home}/${top_dir}" "${nvim_home}/nvim_home"
 	log::success 'done'
 
-	local new_version=$(nvim_version)
+	local new_version=$(nvim_version "${nvim_home}/nvim_home")
 	if [ -z "${old_version}" ]; then
 		log::success "new nvim %s installed" "${new_version}"
 	elif [ "${old_version}" != "${new_version}" ]; then
 		log::success "nvim upgraded, %s -> %s" "${old_version}" "${new_version}"
 	else
-		log::success "nvim %s reinstalled" "${new_version}"
+    log::success "nvim %s reinstalled" "${new_version}"
 	fi
 }
 
@@ -264,5 +274,7 @@ readonly install_nvim
 
 install_nvim "$@" || log::fatal "failed"
 
-log::info 'If this is your first time to install, update PATH for nvim, or else ignore this:'
-log::info '  echo "export PATH=$PATH:%s" >> %s' "${HOME}/nvim_home/bin" "$(current_shell_rc)"
+if [ -z "$(nvim_version)" ]; then
+  log::info 'If this is your first time to install, update PATH for nvim, or else ignore this:'
+  log::info '  echo "export PATH=$PATH:%s" >> %s' "${HOME}/nvim_home/bin" "$(current_shell_rc)"
+fi
