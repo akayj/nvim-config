@@ -146,15 +146,17 @@ function download_and_check() {
     download_url "${url}" > /dev/null || return 1
     log::success 'OK'
   else
-    read -p 'Found local tarball, use it [Y/n]: ' yesNo
-    case "${yesNo}" in
+    read -p 'Found local tarball, use it [Y/n]: ' -s -n1 Yn
+    case "${Yn}" in
       [Nn]*)
+        log::error "No"
         log::log 'download new tarbar...'
         download_url "${url}" > /dev/null 2>&1 || { log::error 'Fail'; return 2; }
         log::success 'OK'
         ;;
 
       *)
+        log::success "Yes"
         log::info 'Use local tarball'
         ;;
     esac
