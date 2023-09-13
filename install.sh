@@ -78,6 +78,8 @@ function set_curl_version() {
 }
 
 function https_curl() {
+  set_curl_version
+
   if [[ $(echo "${curl_version} 7.20.0" | awk '{print ($1 > $2)}') -eq 1 ]]; then
     curl --proto '=https' --tlsv1.2 "$@"
   else
@@ -240,8 +242,6 @@ function install_nvim() {
       log::warn 'force to install'
     fi
   fi
-
-  set_curl_version
 
   local os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
   local file_url
