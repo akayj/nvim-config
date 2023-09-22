@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+echo '----------------------------------------'
+echo '--------- Install nvim binary ----------'
+echo '----------------------------------------'
+
 readonly RELEASE_URL='https://github.com/neovim/neovim/releases/download/nightly/'
 
 readonly WHITE='37' # white
@@ -26,20 +30,25 @@ function color_message() {
   local template="$1"
   shift
 
-  printf "\e[%sm$template\e[0m" "${color}" "$@"
+  if [ -t 1 ]; then
+    printf "\e[%sm$template\e[0m" "${color}" "$@"
+  else
+    printf "$template" "$@"
+  fi
 }
 
 function log::log() { color_message '' "$@"; }
 
-# log::debug() { color_message '35' "$@"; }
 function log::debug() {
   color_message "$BBlue" "$@"
   echo
 }
+
 function log::success() {
   color_message "$BGreen" "$@"
   echo
 }
+
 # shellcheck disable=SC2317
 function log::warn() {
   color_message "$BYellow" "$@"
@@ -68,7 +77,7 @@ function log::fatal() {
   exit "$exit_code"
 }
 
-declare curl_version
+declare curl_version=""
 
 function set_curl_version() {
   if [ -z "${curl_version}" ]; then
@@ -90,7 +99,8 @@ function https_curl() {
 function retrive_file() {
   local url="${1:-}"
 
-  if [ "${url}" == "" ]; then
+  if [ -z "${url}" ]; then
+    log::error 'url is empty'
     return 1
   fi
 
@@ -108,6 +118,7 @@ function nvim_version() {
 
   if command -v "${nvim_bin}" >/dev/null || [ -x "${nvim_bin}" ]; then
     "${nvim_bin}" -v | head -n 1 | awk '{print $2}'
+    # "$nvim_bin" -v | awk '/^NVIM/{v=$2} /^Lua/{print v, "(" $0 ")"}'
   fi
 }
 
@@ -153,8 +164,9 @@ function download_and_check() {
     case "${Yn}" in
     [Nn]*)
       log::error "No"
-      log::log 'download new tarbar...'
-      retrive_file "${url}" >/dev/null 2>&1 || {
+      log::debug 'download new tarbar...'
+      # retrive_file "${url}" >/dev/null 2>&1 || {
+      retrive_file "${url}" || {
         log::error 'Fail'
         return 2
       }
@@ -245,7 +257,6 @@ function install_nvim() {
 
   local os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
   local file_url
-  # local checksum_url=''
 
   case "${os_name}" in
   "darwin")
@@ -278,5 +289,5 @@ install_nvim "$@" || log::fatal "failed"
 
 if [ -z "$(nvim_version)" ]; then
   log::info 'If this is your first time to install, update PATH for nvim, or else ignore this:'
-  log::info '  echo "export PATH=$PATH:%s" >> %s' "${HOME}/nvim_home/bin" "$(current_shell_rc)"
+  log::success '  echo "export PATH=$PATH:%s" >> %s' "${HOME}/nvim_home/bin" "$(current_shell_rc)"
 fi
