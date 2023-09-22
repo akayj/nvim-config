@@ -282,6 +282,9 @@ function install_nvim() {
 
 [ -d "${HOME}/.config/nvim" ] || {
   git clone https://github.com/NvChad/NvChad.git ~/.config/nvim --depth=1
+}
+
+[ -d "${HOME}/.config/nvim/lua/custom" ] || {
   git clone https://github.com/akayj/nvim-config.git ~/.config/nvim/lua/custom --depth=1
 }
 
