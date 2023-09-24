@@ -163,7 +163,7 @@ function download_and_check() {
     read -rp 'Found local tarball, use it [Y/n]: ' -s -n1 Yn
     case "${Yn}" in
     [Nn]*)
-      log::error "No"
+      log::error "${Yn}"
       log::debug 'download new tarbar...'
       # retrive_file "${url}" >/dev/null 2>&1 || {
       retrive_file "${url}" || {
@@ -174,7 +174,7 @@ function download_and_check() {
       ;;
 
     *)
-      log::success "Yes"
+      log::success "${Yn}"
       log::info 'Use local tarball'
       ;;
     esac
