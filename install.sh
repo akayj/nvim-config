@@ -184,10 +184,10 @@ function download_and_check() {
     log::log 'Checking sha256sum...'
     retrive_file "${url}.sha256sum" >/dev/null 2>&1 || return 1
     if check_file "${filename}" >/dev/null; then
-      log::success 'OK'
+      log::success 'ok'
       return
     fi
-    log::error 'Fail'
+    log::error 'fail'
     return 1
   fi
 }
