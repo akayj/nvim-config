@@ -160,11 +160,13 @@ function download_and_check() {
     retrive_file "${url}" >/dev/null || return 1
     log::success 'OK'
   else
-    read -rp 'Found local tarball, use it [Y/n]: ' -s -n1 Yn
+    log::debug "Found local tarball"
+    log::info "  %s" $(realpath ${filename})
+    read -rp "use it ? [Y/n]: " -s -n1 Yn
     case "${Yn}" in
     [Nn]*)
       log::error "${Yn}"
-      log::debug 'download new tarbar...'
+      log::debug 'download new tarball...'
       # retrive_file "${url}" >/dev/null 2>&1 || {
       retrive_file "${url}" || {
         log::error 'Fail'
@@ -181,8 +183,11 @@ function download_and_check() {
   fi
 
   if [ "${check}" == 'y' ]; then
+    log::log 'Fetching latest sha256sum file...'
+    retrive_file "${url}.sha256sum" >/dev/null 2>&1 || { log::error 'failed'; return 1; }
+    log::success 'done'
+
     log::log 'Checking sha256sum...'
-    retrive_file "${url}.sha256sum" >/dev/null 2>&1 || return 1
     if check_file "${filename}" >/dev/null; then
       log::success 'ok'
       return
@@ -247,11 +252,9 @@ function install_nvim() {
   old_version=$(nvim_version)
 
   if [ "${old_version}" != "" ]; then
-    log::info "nvim %s was installed" "${old_version}"
+    log::success "nvim %s was installed" "${old_version}"
     if [ "${force}" != "-f" ]; then
       return
-    else
-      log::warn 'force to install'
     fi
   fi
 
