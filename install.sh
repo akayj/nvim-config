@@ -263,10 +263,12 @@ function install_nvim() {
 
   case "${os_name}" in
   "darwin")
-    file_url=$(printf "${RELEASE_URL}/nvim-%s-%s.%s" "macos" "$(uname -m)" "tar.gz")
+    filename=$(printf "nvim-macos-%s" "$(uname -m)")
+    tarname=$(printf "%s.tar.gz" "${filename}")
+    file_url=$(printf "${RELEASE_URL}/%s" "${tarname}")
 
     download_and_check "${file_url}" || exit 1
-    xattr -c ./nvim-macos.tar.gz && relink 'nvim-macos'
+    xattr -c ${tarname} && relink "${filename}"
     ;;
 
   "linux")
